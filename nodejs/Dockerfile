@@ -1,5 +1,9 @@
 FROM node:lts-stretch-slim AS builder
 
+LABEL Mantainer='DevOps Team'
+LABEL Description="nodejs"
+LABEL Version="lts"
+
 WORKDIR /app
 ARG PROJECT=""
 

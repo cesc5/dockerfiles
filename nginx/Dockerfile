@@ -1,6 +1,8 @@
 FROM debian:buster-slim
 
-LABEL maintainer="TEAM"
+LABEL maintainer="DevOps TEAM"
+LABEL Description="Sonarqube - Continuously inspecting the Code Quality"
+LABEL Version="1.16.1-1~buster"
 
 ENV NGINX_VERSION   1.16.1
 ENV PKG_RELEASE     1~buster
