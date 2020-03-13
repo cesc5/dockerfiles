@@ -5,7 +5,7 @@ LABEL description='Based on Debian'
 
 # Smaller images
 ARG APT_OPTS='--no-install-recommends --no-install-suggests'
-ARG LOCALTIME='Europe/Madrid'
+ARG LOCALTIME='UTC'
 # No user interaction
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG='es_ES.UTF-8'
