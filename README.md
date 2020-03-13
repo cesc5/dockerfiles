@@ -9,7 +9,7 @@ Trying to standardize the way I build Dockerfiles
 ```bash
 # Registry Path
 REGISTRY=local
-IMAGE_NAME=flaskk_simple:latest
+IMAGE_NAME=flask:latest
 BUILD_TAG=${REGISTRY}/${IMAGE_NAME}
 
 docker build --tag ${BUILD_TAG} .
@@ -25,7 +25,7 @@ docker push ${BUILD_TAG}
 ## Run & Access
 
 ```bash
-NAME='test_ubuntu'
+NAME='test_flask'
 # Run New Container, terminal + interactive + detached
 docker run -tid --name ${NAME} ${BUILD_TAG} bash
 # Access
