@@ -1,25 +1,23 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 LABEL mantainer='DevOps Team'
 LABEL description='Based on Debian'
 
 # Smaller images
 ARG APT_OPTS='--no-install-recommends --no-install-suggests'
+ARG APT_ENV='DEBIAN_FRONTEND=noninteractive'
 ARG LOCALTIME='UTC'
+
 # No user interaction
-ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG='es_ES.UTF-8'
 ENV LANGUAGE='es_ES.UTF-8'
 
 USER root
 
-# Change localtime
-RUN rm -f /etc/localtime && \
-	ln -s "/usr/share/zoneinfo/${LOCALTIME}" /etc/localtime
-
 # Install tools
 RUN apt-get update && \
 	apt-get install ${APT_OPTS} -y \
+	tzdata \ 
 	locales \
 	aptitude \
 	vim \
@@ -38,5 +36,9 @@ RUN apt-get update && \
 	# Purge cache
 	rm -rf /var/lib/apt/lists/* && \
     apt-get purge -y --auto-remove
+
+# Change localtime
+RUN ln -sf "/usr/share/zoneinfo/${LOCALTIME}" /etc/localtime \
+	&& dpkg-reconfigure -f noninteractive tzdata
 
 CMD [ "bash" ]
