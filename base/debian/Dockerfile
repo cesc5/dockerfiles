@@ -8,7 +8,7 @@ ARG APT_OPTS='--no-install-recommends --no-install-suggests'
 ARG APT_ENV='DEBIAN_FRONTEND=noninteractive'
 ARG LOCALTIME='UTC'
 
-# No user interaction
+# Language
 ENV LANG='es_ES.UTF-8'
 ENV LANGUAGE='es_ES.UTF-8'
 
@@ -29,9 +29,15 @@ RUN apt-get update && \
 	iputils-arping \
 	default-mysql-client \
 	net-tools \
-	iproute2 && \
-	# Install locales
-	sed -i "s/^# *\(${LANG}\)/\1/" /etc/locale.gen && \
+	iproute2 \
+    apt-transport-https \
+    ca-certificates \
+    gnupg2 \
+    software-properties-common \
+	git
+
+# Install locales
+RUN sed -i "s/^# *\(${LANG}\)/\1/" /etc/locale.gen && \
 	locale-gen && \
 	# Purge cache
 	rm -rf /var/lib/apt/lists/* && \
